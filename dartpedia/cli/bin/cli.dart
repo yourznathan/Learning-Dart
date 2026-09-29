@@ -16,13 +16,18 @@ void main(List<String> arguments) {
   }
 }
 
-void searchWikipedia(List<String>? arguments) {
+void searchWikipedia(List<String>? arguments) async{
   final String articleTitle;
   // If the user didn't pass in arguments, request an article title.
   if (arguments == null || arguments.isEmpty) {
     print('Please provide an article title');
-    // Await input and provide a default empty string if the input is null.
-    articleTitle = stdin.readLineSync() ?? '';
+    // Read input without the null colaescing fallback
+    final inputFromStdin = stdin.readLineSync();
+    if (inputFromStdin == null || inputFromStdin.isEmpty) {
+      print('No article title provided. Exiting...');
+      return;
+    }
+    articleTitle = inputFromStdin;
   } else {
     // Otherwise, join the arguments into a single string
     articleTitle = arguments.join(' ');
