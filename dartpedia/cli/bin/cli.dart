@@ -1,3 +1,5 @@
+import 'dart:io'; // Is a core library that provides APIs to deal with files, directories, sockets and HTTP clients and servers, and more.
+
 const version = '0.0.1';
 
 void main(List<String> arguments) {
@@ -14,7 +16,17 @@ void main(List<String> arguments) {
 }
 
 void searchWikipedia(List<String>? arguments) {
- print('searchWikipedia received arguments: $arguments');
+  final String articleTitle;
+  // If the user didn't pass in arguments, request an article title.
+  if (arguments == null || arguments.isEmpty) {
+    print('Please provide an article title');
+    // Await input and provide a default empty string if the input is null.
+    articleTitle = stdin.readLineSync() ?? '';
+  } else {
+    // Otherwise, join the arguments into a single string
+    articleTitle = arguments.join(' ');
+  }
+ print('Current article title: $articleTitle');
 }
 
 void printUsage() {
