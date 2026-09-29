@@ -34,8 +34,10 @@ void searchWikipedia(List<String>? arguments) async{
   }
 
   print('Looking up articles about "$articleTitle". Please wait...');
-  print('Here ya go!');
-  print('(Pretend this is an article about "$articleTitle")');
+  
+  // Call the API and await the result
+  var articleContent = await getWikipediaArticle(articleTitle);
+  print(articleContent); 
 }
 
 void printUsage() {
