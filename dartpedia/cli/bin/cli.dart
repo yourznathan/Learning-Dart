@@ -1,9 +1,13 @@
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.1';
+void main() {
+  final verboseOption = Option(
+    'verbose',
+    type: OptionType.flag,
+    abbr: 'v',
+    help: 'Display extra logging information.',
+  );
 
-void main(List<String> arguments) async {
-  var runner = CommandRunner();
-  await runner.run(arguments);
+  print('Defined option: ${verboseOption.name}');
+  print('Usage: ${verboseOption.usage}');
 }
-
