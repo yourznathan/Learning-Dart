@@ -1,8 +1,22 @@
-enum OptionType { flag, option } 
+enum OptionType { flag, option }
 
-class Option {
+abstract class CliElement {
+  // Getters without bodies define required properties that every subclass must implement.
+  String get name;
+  String? get help;
+  // In the case of flags, the default value is a bool.
+  // In other options and commands, the default value is a String.
+  // NB: flags are just Option objects that don't take arguments.
+  Object? get defaultValue;
+  String? get valueHelp;
+
+  String get usage;
+}
+
+class Option extends CliElement {
   // Constructor - Instantiates new Option objects (Eg: name and type)
-  Option(this.name, {
+  Option(
+    this.name, {
     required this.type,
     this.help,
     this.abbr,
@@ -11,14 +25,23 @@ class Option {
   });
 
   // Fields
+  @override
   final String name;
+
   final OptionType type;
+
+  @override
   final String? help; // Nullable types (String?)
+
   final String? abbr;
+
+  @override
   final String? defaultValue;
+  @override
   final String? valueHelp;
 
   // Getter
+  @override
   String get usage {
     if (abbr != null) {
       return '-$abbr,--$name: $help';
