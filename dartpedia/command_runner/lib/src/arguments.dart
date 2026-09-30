@@ -127,7 +127,7 @@ class Option extends CliElement {
 class ArgResults {
   Command? command;
   String? commandArg;
-  Map<Option, Option?> options = {};
+  Map<Option, Object?> options = {};
 
   // Returns true if the flag exists and is true
   bool flag (String name) {
